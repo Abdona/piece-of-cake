@@ -12,8 +12,8 @@
     <div class="todo-container">
         <div class="todo-content">
             <div class="input-field">
-                <input type="text" class="input" name="task" id="task" placeholder="Add first value">
-                <select name="firstvalue" id="firstvalue">
+                <input type="text" class="input" name="firstvalue" id="firstvalue" placeholder="Add first value">
+                <select name="firstvalue" id="firstvaluetype">
                     <option value="radius">Radius</option>
                     <option value="chord">Chord</option>
                     <option value="angle">Angle</option>
@@ -23,8 +23,8 @@
                 <br>
                 <br>
                 <br>
-                <input type="text" class="input" name="task" id="task" placeholder="Add second value">
-                <select name="secondvalue" id="secondvalue">
+                <input type="text" class="input" name="secondvalue" id="secondvalue" placeholder="Add second value">
+                <select name="secondvalue" id="secondvaluetype">
                     <option value="radius">Radius</option>
                     <option value="chord">Chord</option>
                     <option value="angle">Angle</option>
@@ -35,7 +35,7 @@
         </div>
         <br>
         <div class="button">
-            <button class="btn" id="trash-all">Calculate</button>
+            <button class="btn" id="CalculateButton" onclick="Calculate()">Calculate</button>
             <select name="calculatedvalue" id="calculatedvalue">
             </select>
         </div>
