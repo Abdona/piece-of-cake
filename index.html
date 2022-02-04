@@ -12,28 +12,31 @@
             <div class="input-field">
                 <input type="text" class="input" name="firstvalue" id="firstvalue" placeholder="Add first value">
                 <select name="firstvalue" id="firstvaluetype">
-                    <option value="radius">Radius</option>
-                    <option value="chord">Chord</option>
-                    <option value="angle">Angle</option>
-                    <option value="surfaceArea">SurfaceArea</option>
-                    <option value="arclength">ArcLength</option>
+                    <option selected>Select Input</option>
+                    <option value="Radius">Radius</option>
+                    <option value="Chord">Chord</option>
+                    <option value="Angle">Angle</option>
+                    <option value="SurfaceArea">SurfaceArea</option>
+                    <option value="ArcLength">ArcLength</option>
                   </select>
                 <br>
                 <br>
                 <br>
                 <input type="text" class="input" name="secondvalue" id="secondvalue" placeholder="Add second value">
-                <select name="secondvalue" id="secondvaluetype">
-                    <option value="radius">Radius</option>
-                    <option value="chord">Chord</option>
-                    <option value="angle">Angle</option>
-                    <option value="surfaceArea">SurfaceArea</option>
-                    <option value="arclength">ArcLength</option>
+                <select name="secondvalue" id="secondvaluetype" onchange="UpdateCalOptions()">
+                    <option selected>Select Input</option>
+                    <option value="Radius">Radius</option>
+                    <option value="Chord">Chord</option>
+                    <option value="Angle">Angle</option>
+                    <option value="SurfaceArea">SurfaceArea</option>
+                    <option value="ArcLength">ArcLength</option>
                   </select>
             </div>
         <br>
         <div class="button">
-            <button class="btn" id="CalculateButton" onclick="Calculate()">Calculate</button>
+            <button class="btn" id="CalculateButton" onclick="UserInput()">Calculate</button>
             <select name="calculatedvalue" id="calculatedvalue">
+                <option selected>Select Target</option>
                 <option id="optionone"></option>
                 <option id="optiontwo"></option>
                 <option id="optionthree"></option>
