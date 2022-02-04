@@ -9,15 +9,13 @@
     <title>PieceOfCake</title>
 </head>
 <body>
-    <div class="todo-container">
-        <div class="todo-content">
             <div class="input-field">
                 <input type="text" class="input" name="firstvalue" id="firstvalue" placeholder="Add first value">
                 <select name="firstvalue" id="firstvaluetype">
                     <option value="radius">Radius</option>
                     <option value="chord">Chord</option>
                     <option value="angle">Angle</option>
-                    <option value="sufracearea">SurfaceArea</option>
+                    <option value="surfaceArea">SurfaceArea</option>
                     <option value="arclength">ArcLength</option>
                   </select>
                 <br>
@@ -28,17 +26,18 @@
                     <option value="radius">Radius</option>
                     <option value="chord">Chord</option>
                     <option value="angle">Angle</option>
-                    <option value="sufracearea">SurfaceArea</option>
+                    <option value="surfaceArea">SurfaceArea</option>
                     <option value="arclength">ArcLength</option>
                   </select>
             </div>
-        </div>
         <br>
         <div class="button">
             <button class="btn" id="CalculateButton" onclick="Calculate()">Calculate</button>
             <select name="calculatedvalue" id="calculatedvalue">
+                <option id="optionone"></option>
+                <option id="optiontwo"></option>
+                <option id="optionthree"></option>
             </select>
         </div>
-    </div>
 </body>
 </html>
