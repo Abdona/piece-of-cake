@@ -1,17 +1,24 @@
 let IntialCalculatedOptions = ["Radius","Angle","Chord","SurfaceArea","ArcLength"];
 let targetType;
 let firstInput={},secondInput={};
+let r;
 
 function area(radius,angle) {
+    r=radius;
+    theta = angle;
     return Math.PI*radius*radius*(angle/360);
     
 }
 
 function arclength(radius,angle) {
+    r=radius;
+    theta = angle;
     return 2*Math.PI*radius*(angle/360)
 }
 
 function lengthchord(radius,angle) {
+    r=radius;
+    theta = angle;
     return 2*radius*Math.sin(angle/2)
 }
 
@@ -38,12 +45,8 @@ function radius(ParmOne,ParmTwo) {
             return obj.type === 'Angle'
           })[0].value)));
     }
-    if(ParmOneType == 'area' && ParmTwoType == 'arclength')
-    return (ParmOne/ParmTwo)*2
-    // if(ParmOneType == 'area' && ParmTwoType == 'chord')
-    // return (1/720)*Math.PI*r*(an)
-    // if(ParmOneType == 'area' && ParmTwoType == 'arclength')
-    // return (ParmOne/ParmTwo)*2
+    if(ParmOne.type == 'SurfaceArea' && ParmTwo.type == 'ArcLength' || ParmTwo.type == 'SurfaceArea' && ParmOne.type == 'ArcLength')
+    return (ArrayOfParam.filter(elem => {return elem.type==='SurfaceArea'})[0].value/ArrayOfParam.filter(elem => {return elem.type==='ArcLength'})[0].value)*2
 }
 
 function angle(ParmOne,ParmTwo) {
@@ -68,6 +71,17 @@ function angle(ParmOne,ParmTwo) {
           })[0].value/(2*(Math.sin(ArrayOfParam.filter(obj => {
             return obj.type === 'Radius'
           })[0].value)))*2);
+    }
+    if(ParmOne.type == 'SurfaceArea' && ParmTwo.type == 'ArcLength' || ParmTwo.type == 'SurfaceArea' && ParmOne.type == 'ArcLength'){
+        let r = radius(ParmOne,ParmTwo)
+        return (360*ArrayOfParam.filter(elem=> {return elem.type==='SurfaceArea'})/(
+            Math.PI*r*r
+        ))
+    }
+    if(ParmOne.type == 'Chord' && ParmTwo.type == 'ArcLength' || ParmTwo.type == 'Chord' && ParmOne.type == 'ArcLength'){
+        return ((Math.PI/360)*ArrayOfParam.filter(elem=> {return elem.type==='SurfaceArea'})/(
+            Math.PI*r*r
+        ))
     }
 }
 
@@ -115,13 +129,26 @@ function calculate(FiInput,SecInput,TargetType) {
             console.log(arclength(SecInput.value,FiInput.value))
             break;
         case 'Radius':
-            console.log(radius(FiInput,SecInput))
+            r = (radius(FiInput,SecInput))
             break;
         case 'Angle':
-            console.log(angle(FiInput,SecInput))
+            theta = (angle(FiInput,SecInput))
             break;
         default:
             break;
     }
-        
+    var c = document.getElementById("circle");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(100, 75, r, 0, 2 * Math.PI);
+
+    ctx.moveTo(100, 75);
+    ctx.lineTo(100 + r * Math.cos(0), 75 + r * Math.sin(0));
+
+    ctx.moveTo(100, 75);
+    ctx.lineTo(100 + r * Math.cos(Math.PI * theta / 180.0), 75 + r * Math.sin(Math.PI * theta / 180.0));
+
+    ctx.lineTo(100 + r * Math.cos(0), 75 + r * Math.sin(0));
+    ctx.moveTo(100 + r * Math.cos(Math.PI * theta / 180.0), 75 + r * Math.sin(Math.PI * theta / 180.0));
+    ctx.stroke();
 }
