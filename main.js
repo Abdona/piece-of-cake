@@ -9,22 +9,25 @@ function validateInput(param) {
     }
 }
 
-function area(radius,angle) {
-    r=radius;
-    theta = angle;
-    return Math.PI*radius*radius*(theta/360);
+function surfacearea(ParamOne,ParamTwo) {
+    let ArrayOfParam = [ParamOne,ParamTwo]
+    r=ArrayOfParam.filter(elem=>{return elem.type==='Radius'})[0].value;
+    theta = r=ArrayOfParam.filter(elem=>{return elem.type==='Angle'})[0].value;
+    return Math.PI*r*r*(theta/360);
 }
 
-function arclength(radius,angle) {
-    r=radius;
-    theta = angle;
-    return 2*Math.PI*radius*(angle/360)
+function arclength(ParamOne,ParamTwo) {
+    let ArrayOfParam = [ParamOne,ParamTwo]
+    r=ArrayOfParam.filter(elem=>{return elem.type==='Radius'})[0].value;
+    theta = ArrayOfParam.filter(elem=>{return elem.type==='Angle'})[0].value;
+    return 2*Math.PI*r*(theta/360)
 }
 
-function lengthchord(radius,angle) {
-    r=radius;
-    theta = angle;
-    return 2*radius*Math.sin((Math.PI*theta)/(2*180))
+function lengthchord(ParamOne,ParamTwo) {
+    let ArrayOfParam = [ParamOne,ParamTwo];
+    r=ArrayOfParam.filter(elem=>{return elem.type =='Radius'})[0].value;
+    theta = ArrayOfParam.filter(elem=>{return elem.type =='Angle'})[0].value;
+    return 2*r*Math.sin((Math.PI*theta)/(2*180))
 }
 
 function radius(ParmOne,ParmTwo) {
@@ -61,7 +64,9 @@ function angle(ParmOne,ParmTwo) {
             return obj.type === 'SurfaceArea'
           })[0].value/((Math.PI)*ArrayOfParam.filter(obj => {
             return obj.type === 'Radius'
-          })[0].value^2)));
+          })[0].value*ArrayOfParam.filter(obj => {
+            return obj.type === 'Radius'
+          })[0].value)));
     }
     if(ParmOne.type == 'Radius' && ParmTwo.type == 'ArcLength' || ParmTwo.type == 'Radius' && ParmOne.type == 'ArcLength' ){
         return (360*ArrayOfParam.filter(obj => {
@@ -114,37 +119,110 @@ function UserInput() {
     calculate(firstInput,secondInput,targetType);
 }
 function calculate(FiInput,SecInput,TargetType) {
-    let result = document.getElementById('result').innerText
-    switch (TargetType) {
-        case 'Chord' :
-            if(FiInput.type === 'Radius' && SecInput === 'Angle')
-            alert(`${TargetType}:${(lengthchord(FiInput.value,SecInput.value))}`)
-            else if (FiInput.type === 'Angle' && SecInput === 'Radius')
-            alert(`${TargetType}:${(lengthchord(SecInput.value,FiInput.value))}`)
-            break;
-        case 'SurfaceArea':
-            if(FiInput.type === 'Radius')
-            alert(`${TargetType}:${(area(FiInput.value,SecInput.value))}`)
-            else
-            alert(`${TargetType}:${(area(SecInput.value,FiInput.value))}`)
-            break;
-        case 'ArcLength':
-            if(FiInput.type === 'Radius')
-            alert(`${TargetType}:${(arclength(FiInput.value,SecInput.value))}`)
-            else
-            alert(`${targetType}:${(arclength(SecInput.value,FiInput.value))}`)
-            break;
-        case 'Radius':
-            alert(`${targetType}:${(radius(FiInput,SecInput))}`)
-            r = (radius(FiInput,SecInput))
-            break;
-        case 'Angle':
-            alert(`${targetType}:${(theta(FiInput,SecInput))}`)
-            theta = (angle(FiInput,SecInput))
-            break;
-        default:
-            break;
+    if(FiInput.type=='Radius' && SecInput.type==='Angle' || FiInput.type=='Angle' && SecInput.type==='Radius')
+    {
+        switch (TargetType) {
+            case 'Chord':
+                alert(`${TargetType}:${(lengthchord(FiInput,SecInput))}`)
+                break;
+            case 'SurfaceArea':
+                alert(`${TargetType}:${(surfacearea(FiInput,SecInput))}`)
+                break;
+            case 'ArcLength':
+                alert(`${TargetType}:${(arclength(FiInput,SecInput))}`)
+                break;
+            default:
+                break;
+        }
     }
+    if(FiInput.type=='Radius' && SecInput.type !=='Angle'|| SecInput.type==='Radius' && FiInput.type !=='Angle')
+    {
+        theta={};
+        switch (TargetType) {
+            case 'Chord':
+                theta.value = angle(FiInput,SecInput);
+                theta.type = 'Angle'
+                console.log(theta)
+                FiInput.type == 'Radius' ? alert(`${TargetType}:${(lengthchord(FiInput,theta))}`) : alert(`${TargetType}:${(lengthchord(theta,SecInput))}`);
+                break;
+            case 'SurfaceArea':
+                theta.value = angle(FiInput,SecInput);
+                theta.type = 'Angle'
+                console.log(theta)
+                FiInput.type == 'Radius' ? alert(`${TargetType}:${(lengthchord(FiInput,theta))}`) : alert(`${TargetType}:${(lengthchord(theta,SecInput))}`);
+                break;
+            case 'Angle':
+                alert(`${TargetType}:${(angle(FiInput,SecInput))}`)
+                break;
+            case 'ArcLength':
+                theta.value = angle(FiInput,SecInput);
+                theta.type = 'Angle'
+                console.log(theta)
+                FiInput.type=='Radius' ? alert(`${TargetType}:${(arclength(FiInput,theta))}`) : alert(`${TargetType}:${(arclength(theta,SecInput))}`);
+                break;
+            default:
+                break;
+        }
+    }
+
+    if(FiInput.type=='Angle' && SecInput.type !=='Radius'|| SecInput.type==='Angle' && FiInput.type !=='Radius')
+    {
+        r={};
+        switch (TargetType) {
+            case 'Chord':
+                r.value = radius(FiInput,SecInput);
+                r.type = 'Radius'
+                console.log(r)
+                FiInput.type == 'Angle' ? alert(`${TargetType}:${(lengthchord(FiInput,r))}`) : alert(`${TargetType}:${(lengthchord(r,SecInput))}`);
+                break;
+            case 'SurfaceArea':
+                r.value = radius(FiInput,SecInput);
+                r.type = 'Radius'
+                console.log(theta)
+                FiInput.type == 'Angle' ? alert(`${TargetType}:${(lengthchord(FiInput,r))}`) : alert(`${TargetType}:${(lengthchord(r,SecInput))}`);
+                break;
+            case 'Radius':
+                alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
+                break;
+            case 'ArcLength':
+                r.value = radius(FiInput,SecInput);
+                r.type = 'Radius'
+                console.log(r)
+                FiInput.type=='Angle' ? alert(`${TargetType}:${(arclength(FiInput,r))}`) : alert(`${TargetType}:${(arclength(r,SecInput))}`);
+                break;
+            default:
+                break;
+        }
+    }
+
+    if(FiInput.type=='SurfaceArea' || SecInput.type==='SurfaceArea')
+    {
+        r={};
+        theta={};
+        switch (TargetType) {
+            case 'Chord':
+                r.value = radius(FiInput,SecInput);
+                r.type = 'Radius'
+                console.log(r)
+                FiInput.type == 'Angle' ? alert(`${TargetType}:${(lengthchord(FiInput,r))}`) : alert(`${TargetType}:${(lengthchord(r,SecInput))}`);
+                break;
+            case 'Radius':
+                alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
+                break;
+            case 'Angle':
+                alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
+                break;
+            case 'ArcLength':
+                r.value = radius(FiInput,SecInput);
+                r.type = 'Radius'
+                console.log(r)
+                FiInput.type=='Angle' ? alert(`${TargetType}:${(arclength(FiInput,r))}`) : alert(`${TargetType}:${(arclength(r,SecInput))}`);
+                break;
+            default:
+                break;
+        }
+    }
+
     var c = document.getElementById("circle");
     var ctx = c.getContext("2d");
     ctx.beginPath();

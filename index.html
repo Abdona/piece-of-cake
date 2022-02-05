@@ -11,7 +11,7 @@
 <body>
             <div class="input-field">
                 <input type="text" onchange="validateInput(this)" class="input" name="firstvalue" id="firstvalue" placeholder="Add first value">
-                <select name="firstvalue" id="firstvaluetype">
+                <select name="firstvalue" id="firstvaluetype" onchange="UpdateCalOptions()">
                     <option selected>Select Input</option>
                     <option value="Radius">Radius</option>
                     <option value="Chord">Chord</option>
