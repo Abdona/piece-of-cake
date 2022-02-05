@@ -196,7 +196,7 @@ function calculate(FiInput,SecInput,TargetType) {
         }
     }
 
-    if(FiInput.type=='SurfaceArea' && SecInput.type==='ArcLength')
+    if(FiInput.type=='SurfaceArea' && SecInput.type==='ArcLength' || SecInput.type=='SurfaceArea' && FiInput.type==='ArcLength' )
     {
         r={};
         theta={};
