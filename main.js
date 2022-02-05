@@ -84,12 +84,13 @@ function angle(ParmOne,ParmTwo) {
     }
     if(ParmOne.type == 'SurfaceArea' && ParmTwo.type == 'ArcLength' || ParmTwo.type == 'SurfaceArea' && ParmOne.type == 'ArcLength'){
         let r = radius(ParmOne,ParmTwo)
-        return (360*ArrayOfParam.filter(elem=> {return elem.type==='SurfaceArea'})/(
-            Math.PI*r*r
-        ))
+        console.log(r);
+        return ( (360*ArrayOfParam.filter(elem=> {return elem.type === 'SurfaceArea'})[0].value)/(
+            Math.PI*r*r )
+            )
     }
     if(ParmOne.type == 'Chord' && ParmTwo.type == 'ArcLength' || ParmTwo.type == 'Chord' && ParmOne.type == 'ArcLength'){
-        return ((Math.PI/360)*ArrayOfParam.filter(elem=> {return elem.type==='SurfaceArea'})/(
+        return ((Math.PI/360)*ArrayOfParam.filter(elem=> {return elem.type==='SurfaceArea'})[0].value/(
             Math.PI*r*r
         ))
     }
@@ -195,33 +196,28 @@ function calculate(FiInput,SecInput,TargetType) {
         }
     }
 
-    // if(FiInput.type=='SurfaceArea' || SecInput.type==='SurfaceArea')
-    // {
-    //     r={};
-    //     theta={};
-    //     switch (TargetType) {
-    //         case 'Chord':
-    //             r.value = radius(FiInput,SecInput);
-    //             r.type = 'Radius'
-    //             console.log(r)
-    //             FiInput.type == 'Angle' ? alert(`${TargetType}:${(lengthchord(FiInput,r))}`) : alert(`${TargetType}:${(lengthchord(r,SecInput))}`);
-    //             break;
-    //         case 'Radius':
-    //             alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
-    //             break;
-    //         case 'Angle':
-    //             alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
-    //             break;
-    //         case 'ArcLength':
-    //             r.value = radius(FiInput,SecInput);
-    //             r.type = 'Radius'
-    //             console.log(r)
-    //             FiInput.type=='Angle' ? alert(`${TargetType}:${(arclength(FiInput,r))}`) : alert(`${TargetType}:${(arclength(r,SecInput))}`);
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
+    if(FiInput.type=='SurfaceArea' && SecInput.type==='ArcLength')
+    {
+        r={};
+        theta={};
+        switch (TargetType) {
+            case 'Chord':
+                r.value = radius(FiInput,SecInput);
+                r.type = 'Radius'
+                theta.value=angle(FiInput,SecInput);
+                theta.type='Angle'
+                alert(`${TargetType}:${(lengthchord(r,theta))}`)
+                break;
+            case 'Radius':
+                alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
+                break;
+            case 'Angle':
+                alert(`${TargetType}:${(angle(FiInput,SecInput))}`)
+                break;
+            default:
+                break;
+        }
+    }
 
     var c = document.getElementById("circle");
     var ctx = c.getContext("2d");
