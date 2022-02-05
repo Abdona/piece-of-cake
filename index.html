@@ -10,7 +10,7 @@
 </head>
 <body>
             <div class="input-field">
-                <input type="text" class="input" name="firstvalue" id="firstvalue" placeholder="Add first value">
+                <input type="text" onchange="validateInput(this)" class="input" name="firstvalue" id="firstvalue" placeholder="Add first value">
                 <select name="firstvalue" id="firstvaluetype">
                     <option selected>Select Input</option>
                     <option value="Radius">Radius</option>
@@ -22,7 +22,7 @@
                 <br>
                 <br>
                 <br>
-                <input type="text" class="input" name="secondvalue" id="secondvalue" placeholder="Add second value">
+                <input type="text"  onchange="validateInput(this)" class="input" name="secondvalue" id="secondvalue" placeholder="Add second value">
                 <select name="secondvalue" id="secondvaluetype" onchange="UpdateCalOptions()">
                     <option selected>Select Input</option>
                     <option value="Radius">Radius</option>

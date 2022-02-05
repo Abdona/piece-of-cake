@@ -3,6 +3,12 @@ let targetType;
 let firstInput={},secondInput={};
 let r;
 
+function validateInput(param) {
+    if (param.value <= 0 || typeof(param.value)=== "string") {
+        alert(`Please Enter a valid value`)
+    }
+}
+
 function area(radius,angle) {
     r=radius;
     theta = angle;
