@@ -195,33 +195,33 @@ function calculate(FiInput,SecInput,TargetType) {
         }
     }
 
-    if(FiInput.type=='SurfaceArea' || SecInput.type==='SurfaceArea')
-    {
-        r={};
-        theta={};
-        switch (TargetType) {
-            case 'Chord':
-                r.value = radius(FiInput,SecInput);
-                r.type = 'Radius'
-                console.log(r)
-                FiInput.type == 'Angle' ? alert(`${TargetType}:${(lengthchord(FiInput,r))}`) : alert(`${TargetType}:${(lengthchord(r,SecInput))}`);
-                break;
-            case 'Radius':
-                alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
-                break;
-            case 'Angle':
-                alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
-                break;
-            case 'ArcLength':
-                r.value = radius(FiInput,SecInput);
-                r.type = 'Radius'
-                console.log(r)
-                FiInput.type=='Angle' ? alert(`${TargetType}:${(arclength(FiInput,r))}`) : alert(`${TargetType}:${(arclength(r,SecInput))}`);
-                break;
-            default:
-                break;
-        }
-    }
+    // if(FiInput.type=='SurfaceArea' || SecInput.type==='SurfaceArea')
+    // {
+    //     r={};
+    //     theta={};
+    //     switch (TargetType) {
+    //         case 'Chord':
+    //             r.value = radius(FiInput,SecInput);
+    //             r.type = 'Radius'
+    //             console.log(r)
+    //             FiInput.type == 'Angle' ? alert(`${TargetType}:${(lengthchord(FiInput,r))}`) : alert(`${TargetType}:${(lengthchord(r,SecInput))}`);
+    //             break;
+    //         case 'Radius':
+    //             alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
+    //             break;
+    //         case 'Angle':
+    //             alert(`${TargetType}:${(radius(FiInput,SecInput))}`)
+    //             break;
+    //         case 'ArcLength':
+    //             r.value = radius(FiInput,SecInput);
+    //             r.type = 'Radius'
+    //             console.log(r)
+    //             FiInput.type=='Angle' ? alert(`${TargetType}:${(arclength(FiInput,r))}`) : alert(`${TargetType}:${(arclength(r,SecInput))}`);
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 
     var c = document.getElementById("circle");
     var ctx = c.getContext("2d");
