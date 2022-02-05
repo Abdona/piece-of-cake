@@ -1,10 +1,10 @@
 let IntialCalculatedOptions = ["Radius","Angle","Chord","SurfaceArea","ArcLength"];
 let targetType;
 let firstInput={},secondInput={};
-let r;
+let r,theta;
 
 function validateInput(param) {
-    if (param.value <= 0 || typeof(param.value)=== "string") {
+    if (param.value <= 0) {
         alert(`Please Enter a valid value`)
     }
 }
@@ -12,8 +12,7 @@ function validateInput(param) {
 function area(radius,angle) {
     r=radius;
     theta = angle;
-    return Math.PI*radius*radius*(angle/360);
-    
+    return Math.PI*radius*radius*(theta/360);
 }
 
 function arclength(radius,angle) {
@@ -25,7 +24,7 @@ function arclength(radius,angle) {
 function lengthchord(radius,angle) {
     r=radius;
     theta = angle;
-    return 2*radius*Math.sin(angle/2)
+    return 2*radius*Math.sin((Math.PI*theta)/(2*180))
 }
 
 function radius(ParmOne,ParmTwo) {
@@ -115,29 +114,32 @@ function UserInput() {
     calculate(firstInput,secondInput,targetType);
 }
 function calculate(FiInput,SecInput,TargetType) {
+    let result = document.getElementById('result').innerText
     switch (TargetType) {
         case 'Chord' :
-            if(FiInput.type === 'Radius')
-            console.log(lengthchord(FiInput.value,SecInput.value))
-            else
-            console.log(lengthchord(SecInput.value,FiInput.value))
+            if(FiInput.type === 'Radius' && SecInput === 'Angle')
+            alert(`${TargetType}:${(lengthchord(FiInput.value,SecInput.value))}`)
+            else if (FiInput.type === 'Angle' && SecInput === 'Radius')
+            alert(`${TargetType}:${(lengthchord(SecInput.value,FiInput.value))}`)
             break;
         case 'SurfaceArea':
             if(FiInput.type === 'Radius')
-            console.log(area(FiInput.value,SecInput.value))
+            alert(`${TargetType}:${(area(FiInput.value,SecInput.value))}`)
             else
-                console.log(area(SecInput.value,FiInput.value))
+            alert(`${TargetType}:${(area(SecInput.value,FiInput.value))}`)
             break;
         case 'ArcLength':
             if(FiInput.type === 'Radius')
-            console.log(arclength(FiInput.value,SecInput.value))
+            alert(`${TargetType}:${(arclength(FiInput.value,SecInput.value))}`)
             else
-            console.log(arclength(SecInput.value,FiInput.value))
+            alert(`${targetType}:${(arclength(SecInput.value,FiInput.value))}`)
             break;
         case 'Radius':
+            alert(`${targetType}:${(radius(FiInput,SecInput))}`)
             r = (radius(FiInput,SecInput))
             break;
         case 'Angle':
+            alert(`${targetType}:${(theta(FiInput,SecInput))}`)
             theta = (angle(FiInput,SecInput))
             break;
         default:
